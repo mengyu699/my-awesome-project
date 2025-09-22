@@ -1,14 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Awesome Project</title>
+    <title>贪吃蛇小游戏</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welcome to My Awesome Project!</h1>
-    <p>This project was created with Claude Code and GitHub.</p>
-    <script src="script.js"></script>
+    <div class="app" role="application" aria-labelledby="game-title">
+        <header class="app__header">
+            <h1 id="game-title">贪吃蛇小游戏</h1>
+            <p class="app__tagline">操作方向键或下方虚拟按钮，引导小蛇吃掉食物并刷新高分。</p>
+        </header>
+
+        <main class="app__main">
+            <section class="scoreboard" aria-label="分数信息">
+                <div class="scoreboard__item">
+                    <span class="scoreboard__label">当前分数</span>
+                    <span id="score" class="scoreboard__value" aria-live="polite">0</span>
+                </div>
+                <div class="scoreboard__item">
+                    <span class="scoreboard__label">最高分</span>
+                    <span id="high-score" class="scoreboard__value" aria-live="polite">0</span>
+                </div>
+                <p id="status-message" class="scoreboard__status" aria-live="polite">点击“开始游戏”或按任意方向键启动。</p>
+            </section>
+
+            <div class="board-wrapper">
+                <canvas id="game-canvas" width="400" height="400" aria-label="贪吃蛇游戏区域" role="img"></canvas>
+                <div id="overlay" class="overlay" hidden>
+                    <div class="overlay__content" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
+                        <h2 id="overlay-title">游戏结束</h2>
+                        <p id="overlay-score">本局得分：0</p>
+                        <p id="overlay-high-score">最高分：0</p>
+                        <button id="restart-button" type="button" class="button button--primary" aria-label="重新开始游戏">重新开始</button>
+                    </div>
+                </div>
+            </div>
+
+            <section class="controls" aria-label="游戏控制">
+                <button id="start-pause" type="button" class="button button--primary" aria-label="开始或暂停游戏">开始游戏</button>
+                <div class="direction-pad" aria-label="方向控制">
+                    <button class="direction-pad__button" type="button" data-direction="up" aria-label="向上" tabindex="0">↑</button>
+                    <div class="direction-pad__middle">
+                        <button class="direction-pad__button" type="button" data-direction="left" aria-label="向左">←</button>
+                        <button class="direction-pad__button" type="button" data-direction="down" aria-label="向下">↓</button>
+                        <button class="direction-pad__button" type="button" data-direction="right" aria-label="向右">→</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js" defer></script>
 </body>
 </html>
