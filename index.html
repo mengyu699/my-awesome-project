@@ -3,53 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>贪吃蛇小游戏</title>
+    <title>iPhone 16 Pro 壁纸工坊</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="app" role="application" aria-labelledby="game-title">
-        <header class="app__header">
-            <h1 id="game-title">贪吃蛇小游戏</h1>
-            <p class="app__tagline">操作方向键或下方虚拟按钮，引导小蛇吃掉食物并刷新高分。</p>
+<body data-theme="dark">
+    <div class="page">
+        <header class="hero" role="banner">
+            <div class="hero__eyebrow">iPhone 16 Pro · 1290 × 2796</div>
+            <h1 class="hero__title">纯色灵感壁纸工坊</h1>
+            <p class="hero__subtitle">探索四种定制风格，通过调整点缀色与细节密度，为你的手机打造纯色背景的极简壁纸。</p>
+            <dl class="hero__meta" aria-label="页面信息">
+                <div class="hero__meta-item">
+                    <dt>背景基调</dt>
+                    <dd>纯色 + 低调几何元素</dd>
+                </div>
+                <div class="hero__meta-item">
+                    <dt>字体体系</dt>
+                    <dd>Inter / SF Pro / 苹方一致</dd>
+                </div>
+                <div class="hero__meta-item">
+                    <dt>输出格式</dt>
+                    <dd>PNG · 高清无压缩</dd>
+                </div>
+            </dl>
         </header>
 
-        <main class="app__main">
-            <section class="scoreboard" aria-label="分数信息">
-                <div class="scoreboard__item">
-                    <span class="scoreboard__label">当前分数</span>
-                    <span id="score" class="scoreboard__value" aria-live="polite">0</span>
+        <main>
+            <section class="controls" aria-labelledby="controls-title">
+                <div class="controls__intro">
+                    <h2 id="controls-title">风格调控中心</h2>
+                    <p>调整以下参数即可实时预览变化，所有壁纸将保持统一视觉语言。</p>
                 </div>
-                <div class="scoreboard__item">
-                    <span class="scoreboard__label">最高分</span>
-                    <span id="high-score" class="scoreboard__value" aria-live="polite">0</span>
+                <div class="controls__grid">
+                    <fieldset class="control-block">
+                        <legend>细节密度</legend>
+                        <label class="slider">
+                            <input type="range" id="detail-density" min="10" max="90" value="45" step="5" aria-describedby="detail-density-note">
+                            <span id="detail-density-value" aria-live="polite">45%</span>
+                        </label>
+                        <p id="detail-density-note">控制几何元素的数量与透明度，数值越大细节越丰富。</p>
+                    </fieldset>
+
+                    <fieldset class="control-block">
+                        <legend>点缀色</legend>
+                        <label class="color-picker" for="accent-color">
+                            <span>自定义色</span>
+                            <input type="color" id="accent-color" value="#5c7dff" aria-describedby="accent-note">
+                        </label>
+                        <label class="toggle" for="use-custom-accent">
+                            <input type="checkbox" id="use-custom-accent" aria-describedby="accent-note">
+                            <span>启用自定义点缀色</span>
+                        </label>
+                        <p id="accent-note">默认采用每款风格的专属配色，可选中开关统一改用自定义颜色。</p>
+                    </fieldset>
+
+                    <fieldset class="control-block">
+                        <legend>页面主题</legend>
+                        <div class="theme-switcher" role="radiogroup" aria-label="页面配色主题">
+                            <button type="button" class="theme-switcher__button" data-theme="light" aria-pressed="false">柔光</button>
+                            <button type="button" class="theme-switcher__button is-active" data-theme="dark" aria-pressed="true">夜空</button>
+                        </div>
+                        <p>仅影响网页观感，不改变导出壁纸颜色。</p>
+                    </fieldset>
                 </div>
-                <p id="status-message" class="scoreboard__status" aria-live="polite">点击“开始游戏”或按任意方向键启动。</p>
             </section>
 
-            <div class="board-wrapper">
-                <canvas id="game-canvas" width="400" height="400" aria-label="贪吃蛇游戏区域" role="img"></canvas>
-                <div id="overlay" class="overlay" hidden>
-                    <div class="overlay__content" role="dialog" aria-modal="true" aria-labelledby="overlay-title">
-                        <h2 id="overlay-title">游戏结束</h2>
-                        <p id="overlay-score">本局得分：0</p>
-                        <p id="overlay-high-score">最高分：0</p>
-                        <button id="restart-button" type="button" class="button button--primary" aria-label="重新开始游戏">重新开始</button>
-                    </div>
+            <section class="gallery" aria-labelledby="gallery-title">
+                <div class="gallery__header">
+                    <h2 id="gallery-title">风格预览与下载</h2>
+                    <p>所有预览均基于真实尺寸画布，可直接下载 PNG 文件。</p>
                 </div>
-            </div>
 
-            <section class="controls" aria-label="游戏控制">
-                <button id="start-pause" type="button" class="button button--primary" aria-label="开始或暂停游戏">开始游戏</button>
-                <div class="direction-pad" aria-label="方向控制">
-                    <button class="direction-pad__button" type="button" data-direction="up" aria-label="向上" tabindex="0">↑</button>
-                    <div class="direction-pad__middle">
-                        <button class="direction-pad__button" type="button" data-direction="left" aria-label="向左">←</button>
-                        <button class="direction-pad__button" type="button" data-direction="down" aria-label="向下">↓</button>
-                        <button class="direction-pad__button" type="button" data-direction="right" aria-label="向右">→</button>
-                    </div>
+                <div class="gallery__list">
+                    <article class="card" data-style="aurora-night">
+                        <header class="card__header">
+                            <h3 class="card__title">极光夜行</h3>
+                            <p class="card__subtitle">深蓝底色配合柔和极光弧线，营造沉静与力量感。</p>
+                        </header>
+                        <canvas class="card__canvas" width="1290" height="2796" aria-label="极光夜行壁纸预览"></canvas>
+                        <footer class="card__footer">
+                            <button type="button" class="card__download" data-download="aurora-night">下载 PNG</button>
+                        </footer>
+                    </article>
+
+                    <article class="card" data-style="coral-dawn">
+                        <header class="card__header">
+                            <h3 class="card__title">晨曦珊瑚</h3>
+                            <p class="card__subtitle">暖调纯色背景叠加柔和波浪，呈现朝霞般的层次。</p>
+                        </header>
+                        <canvas class="card__canvas" width="1290" height="2796" aria-label="晨曦珊瑚壁纸预览"></canvas>
+                        <footer class="card__footer">
+                            <button type="button" class="card__download" data-download="coral-dawn">下载 PNG</button>
+                        </footer>
+                    </article>
+
+                    <article class="card" data-style="neon-flow">
+                        <header class="card__header">
+                            <h3 class="card__title">摩登霓虹</h3>
+                            <p class="card__subtitle">紫夜基底与斜向光束，适合追求未来感的极简搭配。</p>
+                        </header>
+                        <canvas class="card__canvas" width="1290" height="2796" aria-label="摩登霓虹壁纸预览"></canvas>
+                        <footer class="card__footer">
+                            <button type="button" class="card__download" data-download="neon-flow">下载 PNG</button>
+                        </footer>
+                    </article>
+
+                    <article class="card" data-style="mint-haze">
+                        <header class="card__header">
+                            <h3 class="card__title">薄雾薄荷</h3>
+                            <p class="card__subtitle">浅薄荷纯色配合半透明光晕，清爽而留白充足。</p>
+                        </header>
+                        <canvas class="card__canvas" width="1290" height="2796" aria-label="薄雾薄荷壁纸预览"></canvas>
+                        <footer class="card__footer">
+                            <button type="button" class="card__download" data-download="mint-haze">下载 PNG</button>
+                        </footer>
+                    </article>
                 </div>
+            </section>
+
+            <section class="tips" aria-labelledby="tips-title">
+                <h2 id="tips-title">使用建议</h2>
+                <ul>
+                    <li>下载后可直接 AirDrop 到手机或通过 iCloud 同步，设置为主屏幕或锁屏。</li>
+                    <li>若想进一步定制，可在下载后使用系统编辑工具调整亮度或添加小组件。</li>
+                    <li>建议保持原始分辨率，以确保在 iPhone 16 Pro 上保持最高清晰度。</li>
+                </ul>
             </section>
         </main>
+
+        <footer class="site-footer" role="contentinfo">
+            <p>© 2025 壁纸工坊 · 为 iPhone 16 Pro 打造专属纯色风格。</p>
+        </footer>
     </div>
 
     <script src="script.js" defer></script>
